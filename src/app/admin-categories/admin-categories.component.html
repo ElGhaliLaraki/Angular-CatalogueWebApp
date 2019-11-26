@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Gestion des categories</div>
+    <div class="panel-body">
+        <div>
+            <button class="btn btn-success" (click)="onNewcat()">
+                    <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <p></p>
+        <div *ngIf="mode=='new-cat'" class="col-md-6">
+            <form #f="ngForm" (ngSubmit)="onSaveCat(f.value)">
+                <div class="form-group">
+                    <label for="control-label">Name</label>
+                    <input type="text" name="name" ngModel class="form-control">
+                </div>
+                <button type="submit" class="btn btn-default">Save</button>
+            </form>
+        </div>
+        <div *ngIf="mode=='edit-cat'" class="col-md-6">
+            <form #f="ngForm" (ngSubmit)="onUpdateCat(f.value)">
+                <div class="form-group">
+                    <label for="control-label">Name</label>
+                    <input type="text" name="name" ngModel class="form-control" [(ngModel)]="currentCategorie.name">
+                </div>
+                <button type="submit" class="btn btn-default">Update</button>
+            </form>
+        </div>
+        <p></p>
+        <div *ngIf="mode=='list'">
+            <div class="table" *ngIf="categories">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let c of categories._embedded.categories">
+                    <td>{{c.name}}</td>
+                    <td>
+                        <button class="btn btn-danger" (click)="onDeleteCat(c)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" (click)="onEditCat(c)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </td>
+                </tr>
+            </div>
+        </div>
+    </div>
+</div>

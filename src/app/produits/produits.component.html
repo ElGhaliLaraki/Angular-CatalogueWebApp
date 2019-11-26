@@ -1,0 +1,17 @@
+<div class="container">
+    <h3>List of products </h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="products">
+            <tr *ngFor="let p of products._embedded.products">
+                <td>{{p.name}}</td>
+                <td>{{p.price|number:'0.4'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
